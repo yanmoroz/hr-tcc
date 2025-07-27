@@ -1,0 +1,10 @@
+git_url("https://git.tccenter.ru/y.moroz/hr-tcc-ci-certificates.git")
+
+storage_mode("git")
+
+type("appstore") # The default type, can be: appstore, adhoc, enterprise or development
+
+app_identifier(["ru.tcc.hr"])
+username(ENV["APPLE_ID"]) # Your Apple Developer Portal username
+
+# For all available options run `fastlane match --help` 

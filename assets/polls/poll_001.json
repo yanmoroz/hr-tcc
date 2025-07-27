@@ -1,0 +1,130 @@
+{
+    "id": "poll_001",
+    "title": "Опрос о фруктах",
+    "description": "Расскажите о своих предпочтениях во фруктах и оцените качество сервиса.",
+    "imageUrl": "https://placehold.co/800x300@2x.png",
+    "status": "Не пройден",
+    "time": "Вчера в 21:08",
+    "questions": [
+        {
+            "id": "q1",
+            "text": "Какой вариант вам ближе?",
+            "types": [
+                "radioGroup"
+            ],
+            "requiredTypes": [
+                true
+            ],
+            "imageUrl": "https://placehold.co/600x400@2x.png",
+            "options": [
+                {
+                    "id": "apple",
+                    "title": "Яблоко"
+                },
+                {
+                    "id": "orange",
+                    "title": "Апельсин"
+                },
+                {
+                    "id": "banana",
+                    "title": "Банан"
+                }
+            ]
+        },
+        {
+            "id": "q2",
+            "text": "Выберите несколько пунктов и напишите свой вариант",
+            "types": [
+                "checkboxGroup",
+                "textField"
+            ],
+            "requiredTypes": [
+                false,
+                false
+            ],
+            "options": [
+                {
+                    "id": "apple",
+                    "title": "Яблоко"
+                },
+                {
+                    "id": "orange",
+                    "title": "Апельсин"
+                },
+                {
+                    "id": "banana",
+                    "title": "Банан"
+                }
+            ]
+        },
+        {
+            "id": "q3",
+            "text": "Оцените по шкале",
+            "types": [
+                "matrixRadio",
+                "textField"
+            ],
+            "requiredTypes": [
+                true,
+                false
+            ],
+            "rows": [
+                "Сервис",
+                "Цена",
+                "Качество"
+            ],
+            "columns": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5"
+            ]
+        },
+        {
+            "id": "q4",
+            "text": "Любимый фрукт",
+            "types": [
+                "modalSelector"
+            ],
+            "requiredTypes": [
+                false
+            ],
+            "modalOptions": [
+                {
+                    "id": "apple",
+                    "title": "Яблоко"
+                },
+                {
+                    "id": "orange",
+                    "title": "Апельсин"
+                },
+                {
+                    "id": "banana",
+                    "title": "Банан"
+                }
+            ]
+        },
+        {
+            "id": "q5",
+            "text": "Приложите файлы к этому вопросу",
+            "types": [
+                "fileGrid"
+            ],
+            "requiredTypes": [
+                false
+            ]
+        },
+        {
+            "id": "q6",
+            "text": "Напишите ваш любимый фрукт и почему",
+            "types": [
+                "textField"
+            ],
+            "requiredTypes": [
+                true
+            ],
+            "hint": "Введите текстовый ответ"
+        }
+    ]
+}

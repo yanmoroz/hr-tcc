@@ -1,0 +1,1 @@
+export '../../quick_links_widget/components/quick_link_card_widget.dart';
