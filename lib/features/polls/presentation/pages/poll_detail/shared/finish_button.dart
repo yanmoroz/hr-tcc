@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:hr_tcc/config/themes/themes.dart';
 
-class PollsDetailFinishButton extends StatelessWidget {
+// TODO: Reuse some common button widget?
+class FinishButton extends StatelessWidget {
   final String text;
   final VoidCallback onPressed;
   final bool enabled;
 
-  const PollsDetailFinishButton({
+  const FinishButton({
     super.key,
     required this.text,
     required this.onPressed,

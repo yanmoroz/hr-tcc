@@ -3,11 +3,11 @@ import 'package:file_picker/file_picker.dart';
 import 'dart:io';
 import 'package:hr_tcc/presentation/widgets/common/common.dart';
 
-class PollDetailFileGrid extends StatelessWidget {
+class FilesAnswerWidget extends StatelessWidget {
   final List<AppFileGridItem> files;
   final ValueChanged<List<AppFileGridItem>> onFilesChanged;
 
-  const PollDetailFileGrid({
+  const FilesAnswerWidget({
     super.key,
     required this.files,
     required this.onFilesChanged,

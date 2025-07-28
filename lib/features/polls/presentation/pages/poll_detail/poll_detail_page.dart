@@ -6,14 +6,14 @@ import 'package:hr_tcc/generated/assets.gen.dart';
 import 'package:hr_tcc/presentation/blocs/blocs.dart';
 import 'package:hr_tcc/presentation/widgets/common/common.dart';
 
-import 'components/poll_detail_header.dart';
-import 'components/poll_detail_question_widget.dart';
-import 'components/polls_detail_finish_button.dart';
-import 'components/pools_detail_thank_you.dart';
+import 'shared/finish_button.dart';
+import 'widgets/header/header_widget.dart';
+import 'widgets/question/question_widget.dart';
+import 'widgets/submission_confirmation_widget.dart';
 
 // основной Widget опроса
-class PollDetailScreen extends StatelessWidget {
-  const PollDetailScreen({super.key});
+class PollDetailPage extends StatelessWidget {
+  const PollDetailPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +36,7 @@ class _PollView extends StatelessWidget {
             titleStyle: AppTypography.title4Bold,
             headerHeight: 0,
             bottomGap: 0,
-            content: PoolsDetailThankYou(
+            content: SubmissionConfirmationWidget(
               onFinishPressed: () {
                 context.pop();
                 context.pop();
@@ -72,7 +72,7 @@ class _PollView extends StatelessWidget {
                     bottom: 150,
                   ),
                   children: [
-                    PollDetailHeader(model: state.poll),
+                    HeaderWidget(model: state.poll),
                     const SizedBox(height: 24),
                     ...List.generate(state.poll.questions?.length ?? 0, (
                       index,
@@ -93,7 +93,7 @@ class _PollView extends StatelessWidget {
                                   ? 24
                                   : 0,
                         ),
-                        child: PollDetailQuestionWidget(
+                        child: QuestionWidget(
                           question: q,
                           answers: answersForQuestion,
                           onChanged: (updatedAnswer) {
@@ -111,12 +111,13 @@ class _PollView extends StatelessWidget {
                 ),
               ),
               AppFlostingBottomBar(
-                child: PollsDetailFinishButton(
+                child: FinishButton(
                   text: 'Завершить опрос',
                   onPressed: () {
                     context.read<PollDetailBloc>().add(PollDetailSubmitted());
                   },
-                  enabled: state.allRequiredFilled,
+                  // enabled: state.allRequiredFilled,
+                  enabled: true,
                 ),
               ),
             ],

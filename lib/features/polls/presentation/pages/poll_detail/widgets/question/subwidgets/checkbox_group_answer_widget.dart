@@ -3,12 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:hr_tcc/config/themes/themes.dart';
 import 'package:hr_tcc/models/models.dart';
 
-class PollsDetailCheckboxGroup extends StatelessWidget {
+class CheckboxGroupAnswerWidget extends StatelessWidget {
   final List<PollDetailOptionModel> options;
   final List<String> selectedValues;
   final ValueChanged<List<String>> onChanged;
 
-  const PollsDetailCheckboxGroup({
+  const CheckboxGroupAnswerWidget({
     super.key,
     required this.options,
     required this.selectedValues,

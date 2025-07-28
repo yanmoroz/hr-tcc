@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:hr_tcc/config/themes/themes.dart';
 
-class PollsDetailBadge extends StatelessWidget {
+class BadgeWidget extends StatelessWidget {
   final String text;
   final Color backgroundColor;
   final Color textColor;
 
-  const PollsDetailBadge({
+  const BadgeWidget({
     super.key,
     required this.text,
     required this.backgroundColor,

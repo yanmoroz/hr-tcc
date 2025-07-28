@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hr_tcc/config/themes/themes.dart';
 
-class PollsDetailMatrixRadio extends StatelessWidget {
+class MatrixRadioAnswerWidget extends StatelessWidget {
   final List<String> rows;
   final List<String> columns;
   final Map<int, String?> values;
@@ -14,7 +14,7 @@ class PollsDetailMatrixRadio extends StatelessWidget {
   static const double _rowPaddingVertical =
       12; // Отступ строки для радио кнопки
 
-  const PollsDetailMatrixRadio({
+  const MatrixRadioAnswerWidget({
     super.key,
     required this.rows,
     required this.columns,

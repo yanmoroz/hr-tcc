@@ -4,13 +4,16 @@ import 'package:hr_tcc/config/themes/themes.dart';
 import 'package:hr_tcc/generated/assets.gen.dart';
 
 import '../../../../../../presentation/widgets/common/app_show_modular_sheet/components/app_sheet_content_metadata_provider.dart';
-import 'polls_detail_finish_button.dart';
+import '../shared/finish_button.dart';
 
-class PoolsDetailThankYou extends StatelessWidget
+class SubmissionConfirmationWidget extends StatelessWidget
     implements AppSheetContentMetadataProvider {
   final VoidCallback onFinishPressed;
 
-  const PoolsDetailThankYou({super.key, required this.onFinishPressed});
+  const SubmissionConfirmationWidget({
+    super.key,
+    required this.onFinishPressed,
+  });
 
   @override
   int get estimatedRowCount => 1;
@@ -56,7 +59,7 @@ class PoolsDetailThankYou extends StatelessWidget
                 Row(
                   children: [
                     Expanded(
-                      child: PollsDetailFinishButton(
+                      child: FinishButton(
                         text: 'Пожалуйста',
                         onPressed: onFinishPressed,
                         enabled: true,

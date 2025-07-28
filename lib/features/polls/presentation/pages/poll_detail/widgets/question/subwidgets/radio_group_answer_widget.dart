@@ -3,12 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:hr_tcc/config/themes/themes.dart';
 import 'package:hr_tcc/models/models.dart';
 
-class PollsDetailRadioGroup extends StatelessWidget {
+class RadioGroupAnswerWidget extends StatelessWidget {
   final List<PollDetailOptionModel> options;
   final String? value;
   final ValueChanged<String?> onChanged;
 
-  const PollsDetailRadioGroup({
+  const RadioGroupAnswerWidget({
     super.key,
     required this.options,
     required this.value,

@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:hr_tcc/config/themes/themes.dart';
 
-class PollDetailTextField extends StatelessWidget {
+class TextFieldAnswerWidget extends StatelessWidget {
   final String hint;
   final int maxLines;
   final ValueChanged<String>? onChanged;
 
-  const PollDetailTextField({
+  const TextFieldAnswerWidget({
     super.key,
     this.hint = 'Ваш ответ',
     this.maxLines = 3,

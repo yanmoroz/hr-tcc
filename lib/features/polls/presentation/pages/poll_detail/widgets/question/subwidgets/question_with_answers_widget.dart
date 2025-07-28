@@ -2,14 +2,14 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:hr_tcc/config/themes/themes.dart';
 
-class PollDetailQuestionWithAnswers extends StatelessWidget {
+class QuestionWithAnswersWidget extends StatelessWidget {
   final String? question;
   final List<Widget> answers;
   final EdgeInsetsGeometry? padding;
   final double spacing;
   final String? imageUrl;
 
-  const PollDetailQuestionWithAnswers({
+  const QuestionWithAnswersWidget({
     super.key,
     this.question,
     required this.answers,

@@ -4,19 +4,19 @@ import 'package:hr_tcc/config/themes/themes.dart';
 import 'package:hr_tcc/models/models.dart';
 import 'package:hr_tcc/presentation/widgets/common/common.dart';
 
-import 'poll_detail_file_grid.dart';
-import 'poll_detail_text_field.dart';
-import 'polls_detail_checkbox_group.dart';
-import 'polls_detail_matrix.dart';
-import 'polls_detail_radio_group.dart';
+import 'subwidgets/files_answer_widget.dart';
+import 'subwidgets/text_field_answer_widget.dart';
+import 'subwidgets/checkbox_group_answer_widget.dart';
+import 'subwidgets/matrix_radio_answer_widget.dart';
+import 'subwidgets/radio_group_answer_widget.dart';
 
 // WIDGET‑КОНСТРУКТОР ДЛЯ ОДНОГО ВОПРОСА
-class PollDetailQuestionWidget extends StatelessWidget {
+class QuestionWidget extends StatelessWidget {
   final PollQuestionModel question;
   final List<PollAnswerAbstractModel> answers;
   final ValueChanged<PollAnswerAbstractModel> onChanged;
 
-  const PollDetailQuestionWidget({
+  const QuestionWidget({
     super.key,
     required this.question,
     required this.answers,
@@ -96,7 +96,7 @@ class PollDetailQuestionWidget extends StatelessWidget {
       switch (type) {
         case PollAnswerType.radioGroup:
           widgets.add(
-            PollsDetailRadioGroup(
+            RadioGroupAnswerWidget(
               options: question.options,
               value: (answer is RadioAnswerModel) ? answer.selectedId : null,
               onChanged: (selected) {
@@ -113,7 +113,7 @@ class PollDetailQuestionWidget extends StatelessWidget {
 
         case PollAnswerType.checkboxGroup:
           widgets.add(
-            PollsDetailCheckboxGroup(
+            CheckboxGroupAnswerWidget(
               options: question.options,
               selectedValues:
                   (answer is CheckboxAnswerModel)
@@ -133,7 +133,7 @@ class PollDetailQuestionWidget extends StatelessWidget {
 
         case PollAnswerType.matrixRadio:
           widgets.add(
-            PollsDetailMatrixRadio(
+            MatrixRadioAnswerWidget(
               rows: question.rows,
               columns: question.columns,
               values:
@@ -183,7 +183,7 @@ class PollDetailQuestionWidget extends StatelessWidget {
 
         case PollAnswerType.fileGrid:
           widgets.add(
-            PollDetailFileGrid(
+            FilesAnswerWidget(
               files: (answer is FileGridAnswerModel) ? answer.files : const [],
               onFilesChanged: (newFiles) {
                 onChanged(
@@ -196,7 +196,7 @@ class PollDetailQuestionWidget extends StatelessWidget {
 
         case PollAnswerType.textField:
           widgets.add(
-            PollDetailTextField(
+            TextFieldAnswerWidget(
               onChanged: (val) {
                 onChanged(
                   TextFieldAnswerModel(questionId: question.id, text: val),

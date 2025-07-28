@@ -3,11 +3,11 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:hr_tcc/config/themes/themes.dart';
 import 'package:hr_tcc/models/models.dart';
 
-import 'polls_detail_badge.dart';
+import 'subwidgets/badge_widget.dart';
 
-class PollDetailHeader extends StatelessWidget {
+class HeaderWidget extends StatelessWidget {
   final PollDetailModel model;
-  const PollDetailHeader({super.key, required this.model});
+  const HeaderWidget({super.key, required this.model});
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +22,7 @@ class PollDetailHeader extends StatelessWidget {
         Row(
           children: [
             if (model.status != null && (model.status?.isNotEmpty ?? false))
-              PollsDetailBadge(
+              BadgeWidget(
                 text: model.status ?? '',
                 backgroundColor: AppColors.yellow100,
                 textColor: AppColors.black,

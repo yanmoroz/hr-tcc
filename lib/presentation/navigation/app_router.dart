@@ -655,7 +655,7 @@ class AppRouter {
           create:
               (context) =>
                   BlocFactory.createPollBloc()..add(PollDetailStarted(id)),
-          child: const PollDetailScreen(),
+          child: const PollDetailPage(),
         );
       },
     );
