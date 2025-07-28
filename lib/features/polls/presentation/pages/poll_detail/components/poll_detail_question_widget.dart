@@ -2,8 +2,13 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:hr_tcc/config/themes/themes.dart';
 import 'package:hr_tcc/models/models.dart';
-import 'package:hr_tcc/presentation/pages/poll_detail_page/components/components.dart';
 import 'package:hr_tcc/presentation/widgets/common/common.dart';
+
+import 'poll_detail_file_grid.dart';
+import 'poll_detail_text_field.dart';
+import 'polls_detail_checkbox_group.dart';
+import 'polls_detail_matrix.dart';
+import 'polls_detail_radio_group.dart';
 
 // WIDGET‑КОНСТРУКТОР ДЛЯ ОДНОГО ВОПРОСА
 class PollDetailQuestionWidget extends StatelessWidget {

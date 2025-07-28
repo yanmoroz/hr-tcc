@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:hr_tcc/config/themes/themes.dart';
 import 'package:hr_tcc/models/models.dart';
 
-class StatusPoll extends StatelessWidget {
+class PollStatusWidget extends StatelessWidget {
   final Color textColorDone;
   final Color textColorUnDone;
   final Color bgColorDone;
   final Color bgColorUnDone;
 
-  const StatusPoll({
+  const PollStatusWidget({
     super.key,
     required this.status,
     this.textColorDone = AppColors.white,

@@ -4,8 +4,12 @@ import 'package:go_router/go_router.dart';
 import 'package:hr_tcc/config/themes/themes.dart';
 import 'package:hr_tcc/generated/assets.gen.dart';
 import 'package:hr_tcc/presentation/blocs/blocs.dart';
-import 'package:hr_tcc/presentation/pages/poll_detail_page/components/components.dart';
 import 'package:hr_tcc/presentation/widgets/common/common.dart';
+
+import 'components/poll_detail_header.dart';
+import 'components/poll_detail_question_widget.dart';
+import 'components/polls_detail_finish_button.dart';
+import 'components/pools_detail_thank_you.dart';
 
 // основной Widget опроса
 class PollDetailScreen extends StatelessWidget {
@@ -22,9 +26,9 @@ class _PollView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<PollDetailPageBloc, PollDetailPageState>(
+    return BlocConsumer<PollDetailBloc, PollDetailState>(
       listener: (context, state) {
-        if (state is PollDetailPageSuccess) {
+        if (state is PollDetailSuccess) {
           // показать лист с благодарностью
           appShowModularSheet(
             context: context,
@@ -42,15 +46,15 @@ class _PollView extends StatelessWidget {
         }
       },
       builder: (context, state) {
-        if (state is PollDetailPageLoading) {
+        if (state is PollDetailLoading) {
           return const Scaffold(
             body: Center(child: CircularProgressIndicator()),
           );
         }
-        if (state is PollDetailPageFailure) {
+        if (state is PollDetailFailure) {
           return Scaffold(body: Center(child: Text(state.message)));
         }
-        if (state is PollDetailPageLoaded) {
+        if (state is PollDetailLoaded) {
           return Stack(
             children: [
               const SizedBox(height: 24),
@@ -93,8 +97,8 @@ class _PollView extends StatelessWidget {
                           question: q,
                           answers: answersForQuestion,
                           onChanged: (updatedAnswer) {
-                            context.read<PollDetailPageBloc>().add(
-                              PollDetailPageAnswerChanged(
+                            context.read<PollDetailBloc>().add(
+                              PollDetailAnswerChanged(
                                 questionId: q.id,
                                 updatedAnswer: updatedAnswer,
                               ),
@@ -110,9 +114,7 @@ class _PollView extends StatelessWidget {
                 child: PollsDetailFinishButton(
                   text: 'Завершить опрос',
                   onPressed: () {
-                    context.read<PollDetailPageBloc>().add(
-                      PollDetailPageSubmitted(),
-                    );
+                    context.read<PollDetailBloc>().add(PollDetailSubmitted());
                   },
                   enabled: state.allRequiredFilled,
                 ),
@@ -120,12 +122,12 @@ class _PollView extends StatelessWidget {
             ],
           );
         }
-        if (state is PollDetailPageSubmitting) {
+        if (state is PollDetailSubmitting) {
           return const Scaffold(
             body: Center(child: CircularProgressIndicator()),
           );
         }
-        if (state is PollDetailPageSuccess) {
+        if (state is PollDetailSuccess) {
           return const Scaffold(body: SizedBox());
         }
         return const SizedBox.shrink();

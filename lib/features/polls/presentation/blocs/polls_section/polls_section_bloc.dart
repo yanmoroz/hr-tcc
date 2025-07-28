@@ -2,19 +2,19 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hr_tcc/domain/usecases/usecases.dart';
 import 'package:hr_tcc/models/models.dart';
 
-part 'poll_section_event.dart';
-part 'poll_section_state.dart';
+part 'polls_section_event.dart';
+part 'polls_section_state.dart';
 
-class PollSectionBloc extends Bloc<PollSectionEvent, PollSectionState> {
+class PollsSectionBloc extends Bloc<PollsSectionEvent, PollsSectionState> {
   final FetchPollsListUseCase fetchPollsUseCase;
 
-  PollSectionBloc(this.fetchPollsUseCase) : super(PollSectionInitial()) {
+  PollsSectionBloc(this.fetchPollsUseCase) : super(PollsSectionInitial()) {
     on<LoadPolls>(_onLoadPolls);
   }
 
   Future<void> _onLoadPolls(
     LoadPolls event,
-    Emitter<PollSectionState> emit,
+    Emitter<PollsSectionState> emit,
   ) async {
     await Future.delayed(
       const Duration(milliseconds: 500),
@@ -49,6 +49,6 @@ class PollSectionBloc extends Bloc<PollSectionEvent, PollSectionState> {
         status: PollStatus.notPassed,
       ),
     ];
-    emit(PollSectionLoaded(polls: polls));
+    emit(PollsSectionLoaded(polls: polls));
   }
 }

@@ -1,6 +1,6 @@
-part of 'polls_list_page_bloc.dart';
+part of 'polls_list_bloc.dart';
 
-class PollsListPageState {
+class PollsListState {
   final Map<PollStatus, List<PollCardModel>> groupedPolls;
   final Map<PollStatus, String> sectionTitles;
   final PollStatus? selectedFilter;
@@ -13,7 +13,7 @@ class PollsListPageState {
       (groupedPolls[PollStatus.passed]?.length ?? 0) <
       (finishedPollsTotalCount ?? 0);
 
-  PollsListPageState({
+  PollsListState({
     required this.groupedPolls,
     required this.sectionTitles,
     this.selectedFilter,
@@ -23,7 +23,7 @@ class PollsListPageState {
     this.filterTabs,
   });
 
-  factory PollsListPageState.initial() => PollsListPageState(
+  factory PollsListState.initial() => PollsListState(
     groupedPolls: {},
     sectionTitles: {},
     selectedFilter: PollStatus.all,
@@ -33,7 +33,7 @@ class PollsListPageState {
     filterTabs: null,
   );
 
-  PollsListPageState copyWith({
+  PollsListState copyWith({
     Map<PollStatus, List<PollCardModel>>? groupedPolls,
     Map<PollStatus, String>? sectionTitles,
     PollStatus? selectedFilter,
@@ -42,7 +42,7 @@ class PollsListPageState {
     bool? isLoadingMore,
     List<FilterTabModel<PollStatus>>? filterTabs,
   }) {
-    return PollsListPageState(
+    return PollsListState(
       groupedPolls: groupedPolls ?? this.groupedPolls,
       sectionTitles: sectionTitles ?? this.sectionTitles,
       selectedFilter: selectedFilter ?? this.selectedFilter,

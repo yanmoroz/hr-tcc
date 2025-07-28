@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:hr_tcc/config/themes/themes.dart';
 import 'package:hr_tcc/models/models.dart';
-import 'package:hr_tcc/presentation/pages/poll_detail_page/components/components.dart';
+
+import 'polls_detail_badge.dart';
 
 class PollDetailHeader extends StatelessWidget {
   final PollDetailModel model;

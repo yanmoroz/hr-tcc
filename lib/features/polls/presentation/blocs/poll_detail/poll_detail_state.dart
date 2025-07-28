@@ -1,36 +1,36 @@
-part of 'poll_detail_page_bloc.dart';
+part of 'poll_detail_bloc.dart';
 
-abstract class PollDetailPageState extends Equatable {
-  const PollDetailPageState();
+sealed class PollDetailState extends Equatable {
+  const PollDetailState();
   @override
   List<Object?> get props => [];
 }
 
-class PollDetailPageLoading extends PollDetailPageState {}
+class PollDetailLoading extends PollDetailState {}
 
-class PollDetailPageFailure extends PollDetailPageState {
+class PollDetailFailure extends PollDetailState {
   final String message;
-  const PollDetailPageFailure(this.message);
+  const PollDetailFailure(this.message);
   @override
   List<Object?> get props => [message];
 }
 
-class PollDetailPageLoaded extends PollDetailPageState {
+class PollDetailLoaded extends PollDetailState {
   final PollDetailModel poll;
   final Map<String, List<PollAnswerAbstractModel>> answers;
   final bool allRequiredFilled;
-  const PollDetailPageLoaded({
+  const PollDetailLoaded({
     required this.poll,
     required this.answers,
     required this.allRequiredFilled,
   });
 
-  PollDetailPageLoaded copyWith({
+  PollDetailLoaded copyWith({
     PollDetailModel? poll,
     Map<String, List<PollAnswerAbstractModel>>? answers,
     bool? allRequiredFilled,
   }) {
-    return PollDetailPageLoaded(
+    return PollDetailLoaded(
       poll: poll ?? this.poll,
       answers: answers ?? this.answers,
       allRequiredFilled: allRequiredFilled ?? this.allRequiredFilled,
@@ -41,6 +41,6 @@ class PollDetailPageLoaded extends PollDetailPageState {
   List<Object?> get props => [poll, answers, allRequiredFilled];
 }
 
-class PollDetailPageSubmitting extends PollDetailPageState {}
+class PollDetailSubmitting extends PollDetailState {}
 
-class PollDetailPageSuccess extends PollDetailPageState {}
+class PollDetailSuccess extends PollDetailState {}

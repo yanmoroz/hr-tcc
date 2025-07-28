@@ -1,24 +1,24 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../domain/usecases/fetch_polls_usecase.dart';
-import '../../../models/models.dart';
+import '../../../../../domain/usecases/fetch_polls_usecase.dart';
+import '../../../../../models/models.dart';
 
-part 'polls_list_page_event.dart';
-part 'polls_list_page_state.dart';
+part 'polls_list_event.dart';
+part 'polls_list_state.dart';
 
-class PollsListPageBloc extends Bloc<PollsListPageEvent, PollsListPageState> {
+class PollsListBloc extends Bloc<PollsListEvent, PollsListState> {
   final FetchPollsListUseCase fetchPollsUseCase;
 
-  PollsListPageBloc({required this.fetchPollsUseCase})
-    : super(PollsListPageState.initial()) {
-    on<LoadPollsListPage>(_onInitialLoad);
+  PollsListBloc({required this.fetchPollsUseCase})
+    : super(PollsListState.initial()) {
+    on<LoadPollsList>(_onInitialLoad);
     on<LoadMoreFinishedPollsList>(_onLoadMoreFinishedPolls);
     on<FilterPollsListByStatus>(_onFilter);
   }
 
   Future<void> _onInitialLoad(
-    LoadPollsListPage event,
-    Emitter<PollsListPageState> emit,
+    LoadPollsList event,
+    Emitter<PollsListState> emit,
   ) async {
     const page = 1;
     const pageSize = 5;
@@ -48,7 +48,7 @@ class PollsListPageBloc extends Bloc<PollsListPageEvent, PollsListPageState> {
 
   Future<void> _onLoadMoreFinishedPolls(
     LoadMoreFinishedPollsList event,
-    Emitter<PollsListPageState> emit,
+    Emitter<PollsListState> emit,
   ) async {
     if (!state.hasMorePassedPolls || state.isLoadingMore) return;
 
@@ -78,10 +78,7 @@ class PollsListPageBloc extends Bloc<PollsListPageEvent, PollsListPageState> {
     );
   }
 
-  void _onFilter(
-    FilterPollsListByStatus event,
-    Emitter<PollsListPageState> emit,
-  ) {
+  void _onFilter(FilterPollsListByStatus event, Emitter<PollsListState> emit) {
     emit(state.copyWith(selectedFilter: event.status));
   }
 

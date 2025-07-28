@@ -43,10 +43,8 @@ class BlocFactory {
     return QuickLinksBloc();
   }
 
-  static PollsListPageBloc createPollsListPageBloc() {
-    return PollsListPageBloc(
-      fetchPollsUseCase: GetIt.I<FetchPollsListUseCase>(),
-    );
+  static PollsListBloc createPollsListBloc() {
+    return PollsListBloc(fetchPollsUseCase: GetIt.I<FetchPollsListUseCase>());
   }
 
   static AddressBookBloc createAddressBookBloc() {
@@ -169,8 +167,8 @@ class BlocFactory {
     );
   }
 
-  static PollDetailPageBloc createPollBloc() {
-    return PollDetailPageBloc(
+  static PollDetailBloc createPollBloc() {
+    return PollDetailBloc(
       GetIt.I<FetchPollDetailUseCase>(),
       GetIt.I<SafePollDetailUseCase>(),
     );
@@ -208,7 +206,7 @@ class BlocFactory {
     return RequestsWidgetBloc();
   }
 
-  static PollSectionBloc createPollSectionBloc() {
-    return PollSectionBloc(GetIt.I<FetchPollsListUseCase>());
+  static PollsSectionBloc createPollsSectionBloc() {
+    return PollsSectionBloc(GetIt.I<FetchPollsListUseCase>());
   }
 }

@@ -27,7 +27,7 @@ class HomePage extends StatelessWidget {
           const RequestsWidget(),
           const QuickLinksWidget(),
           const ResaleWidget(),
-          const PollSectionWidget(),
+          const PollsSectionWidget(),
           const NewsSectionWidget(),
           const BenefitsWidget(),
           const SizedBox(height: 32),

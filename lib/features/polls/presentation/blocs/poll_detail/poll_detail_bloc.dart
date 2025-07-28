@@ -3,26 +3,25 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hr_tcc/domain/usecases/usecases.dart';
 import 'package:hr_tcc/models/models.dart';
 
-part 'poll_detail_page_event.dart';
-part 'poll_detail_page_state.dart';
+part 'poll_detail_event.dart';
+part 'poll_detail_state.dart';
 
-class PollDetailPageBloc
-    extends Bloc<PollDetailPageEvent, PollDetailPageState> {
+class PollDetailBloc extends Bloc<PollDetailEvent, PollDetailState> {
   final FetchPollDetailUseCase fetchUseCase;
   final SafePollDetailUseCase safeUseCase;
 
-  PollDetailPageBloc(this.fetchUseCase, this.safeUseCase)
-    : super(PollDetailPageLoading()) {
-    on<PollDetailPageStarted>(_onStarted);
-    on<PollDetailPageAnswerChanged>(_onAnswerChanged);
-    on<PollDetailPageSubmitted>(_onSubmitted);
+  PollDetailBloc(this.fetchUseCase, this.safeUseCase)
+    : super(PollDetailLoading()) {
+    on<PollDetailStarted>(_onStarted);
+    on<PollDetailAnswerChanged>(_onAnswerChanged);
+    on<PollDetailSubmitted>(_onSubmitted);
   }
 
   Future<void> _onStarted(
-    PollDetailPageStarted event,
-    Emitter<PollDetailPageState> emit,
+    PollDetailStarted event,
+    Emitter<PollDetailState> emit,
   ) async {
-    emit(PollDetailPageLoading());
+    emit(PollDetailLoading());
     try {
       final poll = await fetchUseCase(pollId: event.pollId);
 
@@ -32,23 +31,23 @@ class PollDetailPageBloc
       }
 
       emit(
-        PollDetailPageLoaded(
+        PollDetailLoaded(
           poll: poll,
           answers: answers,
           allRequiredFilled: _checkAllRequired(poll.questions ?? [], answers),
         ),
       );
     } on Object catch (e) {
-      emit(PollDetailPageFailure('Ошибка загрузки: $e'));
+      emit(PollDetailFailure('Ошибка загрузки: $e'));
     }
   }
 
   void _onAnswerChanged(
-    PollDetailPageAnswerChanged event,
-    Emitter<PollDetailPageState> emit,
+    PollDetailAnswerChanged event,
+    Emitter<PollDetailState> emit,
   ) {
     final current = state;
-    if (current is! PollDetailPageLoaded) return;
+    if (current is! PollDetailLoaded) return;
 
     final newAnswers = Map<String, List<PollAnswerAbstractModel>>.from(
       current.answers,
@@ -76,21 +75,21 @@ class PollDetailPageBloc
   }
 
   Future<void> _onSubmitted(
-    PollDetailPageSubmitted event,
-    Emitter<PollDetailPageState> emit,
+    PollDetailSubmitted event,
+    Emitter<PollDetailState> emit,
   ) async {
     final current = state;
-    if (current is! PollDetailPageLoaded) return;
+    if (current is! PollDetailLoaded) return;
 
-    emit(PollDetailPageSubmitting());
+    emit(PollDetailSubmitting());
     try {
       await safeUseCase(
         pollId: current.poll.id ?? '',
         answers: current.answers.values.expand((e) => e).toList(),
       );
-      emit(PollDetailPageSuccess());
+      emit(PollDetailSuccess());
     } on Object catch (e) {
-      emit(PollDetailPageFailure('Ошибка отправки: $e'));
+      emit(PollDetailFailure('Ошибка отправки: $e'));
     }
   }
 

@@ -4,10 +4,10 @@ import 'package:go_router/go_router.dart';
 import 'package:hr_tcc/config/themes/themes.dart';
 import 'package:hr_tcc/models/models.dart';
 import 'package:hr_tcc/presentation/blocs/blocs.dart';
-import 'package:hr_tcc/presentation/pages/poll_section_widget/components/components.dart';
 import 'package:hr_tcc/presentation/widgets/common/common.dart';
 
-import '../../navigation/navigation.dart';
+import '../../widgets/polls_section/subwidgets/poll_card.dart';
+import '../../../../../presentation/navigation/navigation.dart';
 
 class PollsListPage extends StatefulWidget {
   final Color backgroundColor;
@@ -33,7 +33,7 @@ class _PollsListPageState extends State<PollsListPage> {
   }
 
   void _onScroll() {
-    final bloc = context.read<PollsListPageBloc>();
+    final bloc = context.read<PollsListBloc>();
     final state = bloc.state;
     if (!state.isLoadingMore &&
         state.hasMorePassedPolls &&
@@ -45,7 +45,7 @@ class _PollsListPageState extends State<PollsListPage> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<PollsListPageBloc, PollsListPageState>(
+    return BlocBuilder<PollsListBloc, PollsListState>(
       builder: (context, state) {
         final filtered = state.selectedFilter;
         final grouped = state.groupedPolls;
@@ -65,7 +65,7 @@ class _PollsListPageState extends State<PollsListPage> {
           appBar: const AppNavigationBar(title: 'Опросы'),
           body: Column(
             children: [
-              BlocListener<PollsListPageBloc, PollsListPageState>(
+              BlocListener<PollsListBloc, PollsListState>(
                 listenWhen: (prev, curr) => prev.filterTabs != curr.filterTabs,
                 listener: (context, state) {
                   if (state.filterTabs != null) {
@@ -78,7 +78,7 @@ class _PollsListPageState extends State<PollsListPage> {
                   listenWhen:
                       (prev, curr) => prev.selectedIndex != curr.selectedIndex,
                   listener: (context, state) {
-                    context.read<PollsListPageBloc>().add(
+                    context.read<PollsListBloc>().add(
                       FilterPollsListByStatus(state.selectedTab.value),
                     );
                   },
@@ -147,7 +147,7 @@ class _PollsListPageState extends State<PollsListPage> {
               color: cardColor,
               shadowColor: AppColors.cardShadowColor,
               children: [
-                PollContentCard(
+                PollCard(
                   poll: poll,
                   onTap: () {
                     context.push(AppRoute.pollDetailWithId('poll_001'));

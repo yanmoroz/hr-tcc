@@ -222,8 +222,7 @@ class AppRouter {
               BlocProvider(
                 create:
                     (context) =>
-                        BlocFactory.createPollsListPageBloc()
-                          ..add(LoadPollsListPage()),
+                        BlocFactory.createPollsListBloc()..add(LoadPollsList()),
               ),
             ],
             child: const PollsListPage(),
@@ -655,7 +654,7 @@ class AppRouter {
         return BlocProvider(
           create:
               (context) =>
-                  BlocFactory.createPollBloc()..add(PollDetailPageStarted(id)),
+                  BlocFactory.createPollBloc()..add(PollDetailStarted(id)),
           child: const PollDetailScreen(),
         );
       },

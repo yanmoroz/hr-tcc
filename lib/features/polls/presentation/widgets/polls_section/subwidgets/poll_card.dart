@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:hr_tcc/config/themes/themes.dart';
 import 'package:hr_tcc/models/models.dart';
-import 'package:hr_tcc/presentation/pages/poll_section_widget/components/components.dart';
 import 'package:hr_tcc/presentation/widgets/common/common.dart';
 
-class PollContentCard extends StatelessWidget {
+import 'poll_status_widget.dart';
+
+class PollCard extends StatelessWidget {
   final PollCardModel poll;
   final VoidCallback onTap;
   final Color imageBorderColor;
@@ -13,7 +14,7 @@ class PollContentCard extends StatelessWidget {
   final Color buttonColor;
   final Color buttonTextColor;
 
-  const PollContentCard({
+  const PollCard({
     super.key,
     required this.poll,
     required this.onTap,
@@ -67,7 +68,7 @@ class PollContentCard extends StatelessWidget {
                   const SizedBox(height: 24),
                   Row(
                     children: [
-                      StatusPoll(status: poll.status),
+                      PollStatusWidget(status: poll.status),
                       const Spacer(),
                       Text(
                         'Прошли: ${poll.passedCount}',

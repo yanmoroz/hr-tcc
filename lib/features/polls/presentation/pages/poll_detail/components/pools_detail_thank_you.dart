@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:hr_tcc/config/themes/themes.dart';
 import 'package:hr_tcc/generated/assets.gen.dart';
-import 'package:hr_tcc/presentation/pages/poll_detail_page/components/components.dart';
 
-import '../../../widgets/common/app_show_modular_sheet/components/app_sheet_content_metadata_provider.dart';
+import '../../../../../../presentation/widgets/common/app_show_modular_sheet/components/app_sheet_content_metadata_provider.dart';
+import 'polls_detail_finish_button.dart';
 
 class PoolsDetailThankYou extends StatelessWidget
     implements AppSheetContentMetadataProvider {
