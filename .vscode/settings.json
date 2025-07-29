@@ -18,5 +18,5 @@
     "editor.tabCompletion": "onlySnippets",
     "editor.wordBasedSuggestions": "off"
   },
-  "dart.flutterSdkPath": ".fvm/versions/3.32.4"
+  "dart.flutterSdkPath": ".fvm/flutter_sdk"
 }
