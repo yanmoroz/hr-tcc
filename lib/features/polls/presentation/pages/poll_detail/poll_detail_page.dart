@@ -6,6 +6,7 @@ import 'package:hr_tcc/generated/assets.gen.dart';
 import 'package:hr_tcc/presentation/blocs/blocs.dart';
 import 'package:hr_tcc/presentation/widgets/common/common.dart';
 
+import '../../blocs/poll_detail/poll_detail_bloc.dart';
 import 'shared/finish_button.dart';
 import 'widgets/header/header_widget.dart';
 import 'widgets/question/question_widget.dart';

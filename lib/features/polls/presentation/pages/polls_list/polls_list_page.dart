@@ -5,6 +5,8 @@ import 'package:hr_tcc/models/models.dart';
 import 'package:hr_tcc/presentation/blocs/blocs.dart';
 import 'package:hr_tcc/presentation/widgets/common/common.dart';
 
+import '../../blocs/polls_list/polls_list_bloc.dart';
+
 class PollsListPage extends StatefulWidget {
   final Color backgroundColor;
   final Color cardColor;
@@ -35,7 +37,7 @@ class _PollsListPageState extends State<PollsListPage> {
         state.hasMorePassedPolls &&
         _scrollController.position.pixels >=
             _scrollController.position.maxScrollExtent - 200) {
-      bloc.add(LoadMoreFinishedPollsList());
+      bloc.add(LoadMoreFinishedPolls());
     }
   }
 
@@ -75,7 +77,7 @@ class _PollsListPageState extends State<PollsListPage> {
                       (prev, curr) => prev.selectedIndex != curr.selectedIndex,
                   listener: (context, state) {
                     context.read<PollsListBloc>().add(
-                      FilterPollsListByStatus(state.selectedTab.value),
+                      FilterPollsByStatus(state.selectedTab.value),
                     );
                   },
                   child: FilterBar(

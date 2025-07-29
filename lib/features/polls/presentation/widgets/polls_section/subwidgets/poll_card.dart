@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hr_tcc/config/themes/themes.dart';
 import 'package:hr_tcc/presentation/widgets/common/common.dart';
 
+import '../../../../domain/entities/poll_status.dart';
 import '../../../viewmodels/poll_card_view_model.dart';
 import 'poll_status_widget.dart';
 
@@ -68,7 +69,9 @@ class PollCard extends StatelessWidget {
                   const SizedBox(height: 24),
                   Row(
                     children: [
-                      PollStatusWidget(isCompleted: viewModel.isCompleted),
+                      PollStatusWidget(
+                        isCompleted: viewModel.status == PollStatus.completed,
+                      ),
                       const Spacer(),
                       Text(
                         'Прошли: ${viewModel.passedCount}',
@@ -81,7 +84,7 @@ class PollCard extends StatelessWidget {
             ),
           ],
         ),
-        if (!viewModel.isCompleted) ...[
+        if (viewModel.status == PollStatus.notCompleted) ...[
           const SizedBox(height: 16),
           SizedBox(
             height: 40,

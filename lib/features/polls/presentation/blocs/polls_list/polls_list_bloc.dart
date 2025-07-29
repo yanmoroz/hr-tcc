@@ -11,13 +11,13 @@ class PollsListBloc extends Bloc<PollsListEvent, PollsListState> {
 
   PollsListBloc({required this.fetchPollsUseCase})
     : super(PollsListState.initial()) {
-    on<LoadPollsList>(_onInitialLoad);
-    on<LoadMoreFinishedPollsList>(_onLoadMoreFinishedPolls);
-    on<FilterPollsListByStatus>(_onFilter);
+    on<LoadPolls>(_onInitialLoad);
+    on<LoadMoreFinishedPolls>(_onLoadMoreFinishedPolls);
+    on<FilterPollsByStatus>(_onFilter);
   }
 
   Future<void> _onInitialLoad(
-    LoadPollsList event,
+    LoadPolls event,
     Emitter<PollsListState> emit,
   ) async {
     const page = 1;
@@ -47,7 +47,7 @@ class PollsListBloc extends Bloc<PollsListEvent, PollsListState> {
   }
 
   Future<void> _onLoadMoreFinishedPolls(
-    LoadMoreFinishedPollsList event,
+    LoadMoreFinishedPolls event,
     Emitter<PollsListState> emit,
   ) async {
     if (!state.hasMorePassedPolls || state.isLoadingMore) return;
@@ -78,7 +78,7 @@ class PollsListBloc extends Bloc<PollsListEvent, PollsListState> {
     );
   }
 
-  void _onFilter(FilterPollsListByStatus event, Emitter<PollsListState> emit) {
+  void _onFilter(FilterPollsByStatus event, Emitter<PollsListState> emit) {
     emit(state.copyWith(selectedFilter: event.status));
   }
 

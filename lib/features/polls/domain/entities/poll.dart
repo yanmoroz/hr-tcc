@@ -1,10 +1,12 @@
+import 'poll_status.dart';
+
 class Poll {
   final int id;
   final String title;
   final String subtitle;
   final int passedCount;
   final String? imageUrl;
-  final bool isCompleted;
+  final PollStatus status;
   final DateTime createdAt;
 
   const Poll({
@@ -13,7 +15,7 @@ class Poll {
     required this.subtitle,
     required this.passedCount,
     this.imageUrl,
-    this.isCompleted = false,
+    required this.status,
     required this.createdAt,
   });
 }

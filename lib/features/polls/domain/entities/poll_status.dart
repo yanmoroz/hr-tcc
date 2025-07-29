@@ -1,0 +1,1 @@
+enum PollStatus { completed, notCompleted }

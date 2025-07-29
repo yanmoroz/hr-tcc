@@ -6,6 +6,7 @@ import '../../../../../config/themes/themes.dart';
 import '../../../../../presentation/blocs/blocs.dart';
 import '../../../../../presentation/navigation/navigation.dart';
 import '../../../../../presentation/widgets/common/common.dart';
+import '../../blocs/polls_section/polls_section_bloc.dart';
 import 'subwidgets/poll_card.dart';
 
 class PollsSectionWidget extends StatelessWidget {

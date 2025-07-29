@@ -1,5 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../domain/entities/poll_status.dart';
 import '../../../domain/usecases/get_polls_usecase.dart';
 import '../../viewmodels/poll_card_view_model.dart';
 
@@ -22,7 +23,7 @@ class PollsSectionBloc extends Bloc<PollsSectionEvent, PollsSectionState> {
     final result = await getPollsUseCase.call(
       page: 1,
       pageSize: 2,
-      isCompleted: false,
+      status: PollStatus.notCompleted,
     );
 
     emit(

@@ -7,6 +7,8 @@ import 'package:hr_tcc/domain/usecases/usecases.dart';
 import '../../data/extensions/biometric_type_extension.dart';
 import '../../domain/entities/current_user.dart';
 import '../../domain/repositories/pincode_repository.dart';
+import '../../features/polls/presentation/blocs/poll_detail/poll_detail_bloc.dart';
+import '../../features/polls/presentation/blocs/polls_list/polls_list_bloc.dart';
 import '../../models/benefits_list_categories_model.dart';
 import '../blocs/blocs.dart';
 import '../cubits/auth/auth_cubit.dart';
@@ -222,7 +224,7 @@ class AppRouter {
               BlocProvider(
                 create:
                     (context) =>
-                        BlocFactory.createPollsListBloc()..add(LoadPollsList()),
+                        BlocFactory.createPollsListBloc()..add(LoadPolls()),
               ),
             ],
             child: const PollsListPage(),

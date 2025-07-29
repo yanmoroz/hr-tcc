@@ -1,4 +1,5 @@
 import '../../../../core/common/paged_result.dart';
+import '../../domain/entities/poll_status.dart';
 import '../models/poll_model.dart';
 import 'poll_remote_data_source.dart';
 
@@ -7,18 +8,18 @@ class PollMockDataSource extends PollRemoteDataSource {
   Future<PagedResult<PollModel>> fetchPolls({
     required int page,
     required int pageSize,
-    required bool? isCompleted,
+    required PollStatus? status,
   }) async {
     await Future.delayed(const Duration(milliseconds: 400));
 
     List<PollModel> mockPolls = _mockPolls;
 
-    if (isCompleted == null) {
+    if (status == null) {
       mockPolls = mockPolls.take(pageSize).toList();
     } else {
       mockPolls =
           mockPolls
-              .where((poll) => poll.isCompleted == isCompleted)
+              .where((poll) => poll.status == status)
               .take(pageSize)
               .toList();
     }
@@ -38,7 +39,7 @@ class PollMockDataSource extends PollRemoteDataSource {
       createdAt: DateTime.now(),
       imageUrl: 'https://placehold.co/600x400@2x.png',
       passedCount: 100,
-      isCompleted: false,
+      status: PollStatus.notCompleted,
     ),
     PollModel(
       id: 2,
@@ -47,7 +48,7 @@ class PollMockDataSource extends PollRemoteDataSource {
       subtitle: 'Описание опроса-2',
       imageUrl: 'https://placehold.co/600x400@2x.png',
       passedCount: 100,
-      isCompleted: false,
+      status: PollStatus.notCompleted,
     ),
     PollModel(
       id: 3,
@@ -56,7 +57,7 @@ class PollMockDataSource extends PollRemoteDataSource {
       subtitle: 'Описание опроса-3',
       imageUrl: 'https://placehold.co/600x400@2x.png',
       passedCount: 100,
-      isCompleted: true,
+      status: PollStatus.completed,
     ),
     PollModel(
       id: 4,
@@ -65,7 +66,7 @@ class PollMockDataSource extends PollRemoteDataSource {
       subtitle: 'Описание опроса-4',
       imageUrl: 'https://placehold.co/600x400@2x.png',
       passedCount: 100,
-      isCompleted: true,
+      status: PollStatus.completed,
     ),
     PollModel(
       id: 5,
@@ -74,7 +75,7 @@ class PollMockDataSource extends PollRemoteDataSource {
       subtitle: 'Описание опроса-5',
       imageUrl: 'https://placehold.co/600x400@2x.png',
       passedCount: 100,
-      isCompleted: true,
+      status: PollStatus.completed,
     ),
   ];
 }

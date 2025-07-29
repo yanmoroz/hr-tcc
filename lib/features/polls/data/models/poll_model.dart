@@ -1,4 +1,5 @@
 import '../../domain/entities/poll.dart';
+import '../../domain/entities/poll_status.dart';
 
 class PollModel {
   final int id;
@@ -6,7 +7,7 @@ class PollModel {
   final String subtitle;
   final int passedCount;
   final String? imageUrl;
-  final bool isCompleted;
+  final PollStatus status;
   final DateTime createdAt;
 
   const PollModel({
@@ -15,7 +16,7 @@ class PollModel {
     required this.subtitle,
     required this.passedCount,
     this.imageUrl,
-    required this.isCompleted,
+    required this.status,
     required this.createdAt,
   });
 
@@ -25,7 +26,7 @@ class PollModel {
     subtitle: subtitle,
     passedCount: passedCount,
     imageUrl: imageUrl,
-    isCompleted: isCompleted,
+    status: status,
     createdAt: createdAt,
   );
 }

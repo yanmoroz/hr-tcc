@@ -2,11 +2,12 @@ part of 'polls_list_bloc.dart';
 
 abstract class PollsListEvent {}
 
-class LoadPollsList extends PollsListEvent {}
+class LoadPolls extends PollsListEvent {}
 
-class FilterPollsListByStatus extends PollsListEvent {
+class FilterPollsByStatus extends PollsListEvent {
   final PollStatus status;
-  FilterPollsListByStatus(this.status);
+
+  FilterPollsByStatus(this.status);
 }
 
-class LoadMoreFinishedPollsList extends PollsListEvent {}
+class LoadMoreFinishedPolls extends PollsListEvent {}
