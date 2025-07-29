@@ -13,11 +13,17 @@ class PollRepositoryImpl implements PollRepository {
     int page = 1,
     int pageSize = 10,
     bool? isCompleted,
-  }) {
-    return remoteDataSource.fetchPolls(
+  }) async {
+    final result = await remoteDataSource.fetchPolls(
       page: page,
       pageSize: pageSize,
       isCompleted: isCompleted,
+    );
+
+    return PagedResult<Poll>(
+      items: result.items.map((pollModel) => pollModel.toEntity()).toList(),
+      totalCount: result.totalCount,
+      hasMore: result.hasMore,
     );
   }
 }

@@ -1,13 +1,31 @@
 import '../../domain/entities/poll.dart';
 
-class PollModel extends Poll {
+class PollModel {
+  final int id;
+  final String title;
+  final String subtitle;
+  final int passedCount;
+  final String? imageUrl;
+  final bool isCompleted;
+  final DateTime createdAt;
+
   const PollModel({
-    required super.id,
-    required super.title,
-    required super.subtitle,
-    required super.passedCount,
-    super.imageUrl,
-    required super.isCompleted,
-    required super.createdAt,
+    required this.id,
+    required this.title,
+    required this.subtitle,
+    required this.passedCount,
+    this.imageUrl,
+    required this.isCompleted,
+    required this.createdAt,
   });
+
+  Poll toEntity() => Poll(
+    id: id,
+    title: title,
+    subtitle: subtitle,
+    passedCount: passedCount,
+    imageUrl: imageUrl,
+    isCompleted: isCompleted,
+    createdAt: createdAt,
+  );
 }
