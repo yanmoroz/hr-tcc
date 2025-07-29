@@ -4,6 +4,7 @@ import 'package:gap/gap.dart';
 
 import '../../../../../config/themes/app_colors.dart';
 import '../../../../../config/themes/app_typography.dart';
+import '../../../../../core/utils/date_utils.dart';
 import '../../../../../domain/entities/requests/absence_request.dart';
 import '../../../../blocs/absence_request/absence_request_view_bloc.dart';
 import '../../../../blocs/bloc_factory.dart';
@@ -64,7 +65,7 @@ class _AbsenceRequestView extends StatelessWidget {
                     d.type == AbsenceType.other) ...[
                   const SectionLabel('Дата или период'),
                   Text(
-                    _formatDate(d.date ?? DateTime.now()),
+                    AppDateUtils.formatDate(d.date ?? DateTime.now()),
                     style: AppTypography.text1Regular,
                   ),
                   const Gap(20),
@@ -72,7 +73,7 @@ class _AbsenceRequestView extends StatelessWidget {
                 if (d.type == AbsenceType.workSchedule && d.period != null) ...[
                   const SectionLabel('Дата или период'),
                   Text(
-                    '${_formatDate(d.period!.start)} - ${_formatDate(d.period!.end)}',
+                    AppDateUtils.formatDateRange(d.period!),
                     style: AppTypography.text1Regular,
                   ),
                   const Gap(20),
@@ -112,10 +113,6 @@ class _AbsenceRequestView extends StatelessWidget {
         },
       ),
     );
-  }
-
-  String _formatDate(DateTime date) {
-    return "${date.day.toString().padLeft(2, '0')}.${date.month.toString().padLeft(2, '0')}.${date.year}";
   }
 
   String _formatTime(BuildContext context, TimeOfDay? t) {

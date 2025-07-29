@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:hr_tcc/config/themes/themes.dart';
 
+import '../../../../core/utils/date_utils.dart';
+
 class RequestStatusDateRow extends StatelessWidget {
   final Widget status;
   final DateTime date;
@@ -24,7 +26,7 @@ class RequestStatusDateRow extends StatelessWidget {
         children: [
           status,
           Text(
-            'от ${_formatDate(date)}',
+            'от ${AppDateUtils.formatDate(date)}',
             style:
                 dateStyle ??
                 AppTypography.text2Regular.copyWith(color: AppColors.gray700),
@@ -32,9 +34,5 @@ class RequestStatusDateRow extends StatelessWidget {
         ],
       ),
     );
-  }
-
-  String _formatDate(DateTime date) {
-    return '${date.day.toString().padLeft(2, '0')}.${date.month.toString().padLeft(2, '0')}.${date.year}';
   }
 }

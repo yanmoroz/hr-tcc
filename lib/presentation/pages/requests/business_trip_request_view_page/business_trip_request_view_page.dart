@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../config/themes/themes.dart';
+import '../../../../core/utils/date_utils.dart';
 import '../../../../domain/entities/entities.dart';
 import '../../../../domain/entities/requests/business_trip_request.dart';
 import '../../../blocs/blocs.dart';
@@ -55,7 +56,7 @@ class BusinessTripRequestViewPage extends StatelessWidget {
                   const SectionLabel('Период'),
                   const SizedBox(height: 2),
                   Text(
-                    _formatDateRange(request.period),
+                    AppDateUtils.formatDateRange(request.period),
                     style: AppTypography.text1Regular.copyWith(
                       color: AppColors.black,
                     ),
@@ -177,13 +178,5 @@ class BusinessTripRequestViewPage extends StatelessWidget {
         },
       ),
     );
-  }
-
-  String _formatDate(DateTime date) {
-    return "${date.day.toString().padLeft(2, '0')}.${date.month.toString().padLeft(2, '0')}.${date.year}";
-  }
-
-  String _formatDateRange(DateTimeRange range) {
-    return "${_formatDate(range.start)} - ${_formatDate(range.end)}";
   }
 }

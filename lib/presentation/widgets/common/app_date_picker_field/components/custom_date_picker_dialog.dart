@@ -5,6 +5,8 @@ import 'package:go_router/go_router.dart';
 import 'package:hr_tcc/config/themes/themes.dart';
 import 'package:hr_tcc/presentation/widgets/common/common.dart';
 
+import '../../../../../core/utils/date_utils.dart';
+
 class CustomDatePickerDialog extends StatefulWidget {
   final DateTime initialDate;
   final DateTime firstDate;
@@ -300,8 +302,8 @@ class _CustomDatePickerDialogState extends State<CustomDatePickerDialog>
                             children: [
                               Text(
                                 _rangeEnd == null
-                                    ? _formatDate(_rangeStart!)
-                                    : '${_formatDate(_rangeStart!)} - ${_formatDate(_rangeEnd!)}',
+                                    ? AppDateUtils.formatDate(_rangeStart!)
+                                    : '${AppDateUtils.formatDate(_rangeStart!)} - ${AppDateUtils.formatDate(_rangeEnd!)}',
                                 style: const TextStyle(
                                   fontSize: 14,
                                   fontWeight: FontWeight.w500,
@@ -597,10 +599,6 @@ class _CustomDatePickerDialogState extends State<CustomDatePickerDialog>
         ),
       ),
     );
-  }
-
-  String _formatDate(DateTime date) {
-    return "${date.day.toString().padLeft(2, '0')}.${date.month.toString().padLeft(2, '0')}.${date.year}";
   }
 }
 

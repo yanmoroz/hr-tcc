@@ -11,6 +11,8 @@ import 'package:hr_tcc/presentation/blocs/unplanned_training_request/unplanned_t
 import 'package:hr_tcc/domain/usecases/get_unplanned_training_request_usecase.dart';
 import 'package:hr_tcc/data/repositories/unplanned_training_request_repository_mock.dart';
 
+import '../../../../core/utils/date_utils.dart';
+
 class UnplannedTrainingRequestViewPage extends StatelessWidget {
   final String requestId;
   const UnplannedTrainingRequestViewPage({super.key, required this.requestId});
@@ -102,12 +104,16 @@ class _UnplannedTrainingRequestView extends StatelessWidget {
                 const SizedBox(height: 16),
                 const SectionLabel('Дата начала обучения'),
                 _FieldValue(
-                  req.startDate != null ? _formatDate(req.startDate!) : '-',
+                  req.startDate != null
+                      ? AppDateUtils.formatDate(req.startDate!)
+                      : '-',
                 ),
                 const SizedBox(height: 16),
                 const SectionLabel('Дата окончания обучения'),
                 _FieldValue(
-                  req.endDate != null ? _formatDate(req.endDate!) : '-',
+                  req.endDate != null
+                      ? AppDateUtils.formatDate(req.endDate!)
+                      : '-',
                 ),
                 if (req.unknownDates && req.month != null) ...[
                   const SizedBox(height: 16),
@@ -181,8 +187,4 @@ class _EmployeeRow extends StatelessWidget {
       ),
     );
   }
-}
-
-String _formatDate(DateTime date) {
-  return '${date.day.toString().padLeft(2, '0')}.${date.month.toString().padLeft(2, '0')}.${date.year}';
 }

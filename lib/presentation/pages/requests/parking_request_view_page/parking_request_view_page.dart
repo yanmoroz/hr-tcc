@@ -7,6 +7,8 @@ import 'package:hr_tcc/presentation/blocs/parking_request/parking_request_view_b
 import 'package:hr_tcc/presentation/pages/requests/components/components.dart';
 import 'package:hr_tcc/config/themes/themes.dart';
 
+import '../../../../core/utils/date_utils.dart';
+
 class ParkingRequestViewPage extends StatelessWidget {
   final String requestId;
   const ParkingRequestViewPage({super.key, required this.requestId});
@@ -200,7 +202,7 @@ class ParkingRequestViewPage extends StatelessWidget {
                   const SectionLabel('Дата или период'),
                   const SizedBox(height: 2),
                   Text(
-                    '${_formatDate(request.dateRange.start)} — ${_formatDate(request.dateRange.end)}',
+                    AppDateUtils.formatDateRange(request.dateRange),
                     style: AppTypography.text1Regular.copyWith(
                       color: AppColors.black,
                     ),
@@ -250,10 +252,6 @@ class ParkingRequestViewPage extends StatelessWidget {
         },
       ),
     );
-  }
-
-  String _formatDate(DateTime date) {
-    return '${date.day.toString().padLeft(2, '0')}.${date.month.toString().padLeft(2, '0')}.${date.year}';
   }
 
   String _formatTime(TimeOfDay t) {

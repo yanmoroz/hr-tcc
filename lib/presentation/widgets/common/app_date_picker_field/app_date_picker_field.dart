@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../../config/themes/app_colors.dart';
+import '../../../../core/utils/date_utils.dart';
 import '../../../../generated/assets.gen.dart';
 import '../app_text_field/app_text_field.dart';
 import 'components/custom_date_picker_dialog.dart';
@@ -68,16 +69,14 @@ class _AppDatePickerFieldState extends State<AppDatePickerField> {
     super.dispose();
   }
 
-  String _formatDate(DateTime date) {
-    return "${date.day.toString().padLeft(2, '0')}.${date.month.toString().padLeft(2, '0')}.${date.year}";
-  }
-
   String? get _displayText {
     if (widget.mode == AppDatePickerMode.single) {
-      return widget.value != null ? _formatDate(widget.value!) : null;
+      return widget.value != null
+          ? AppDateUtils.formatDate(widget.value!)
+          : null;
     } else {
       if (widget.rangeValue != null) {
-        return '${_formatDate(widget.rangeValue!.start)} - ${_formatDate(widget.rangeValue!.end)}';
+        return '${AppDateUtils.formatDate(widget.rangeValue!.start)} - ${AppDateUtils.formatDate(widget.rangeValue!.end)}';
       }
       return null;
     }

@@ -7,6 +7,8 @@ import 'package:hr_tcc/domain/repositories/alpina_digital_access_request_reposit
 import 'package:hr_tcc/domain/usecases/fetch_alpina_digital_access_request_details_usecase.dart';
 import 'package:hr_tcc/presentation/pages/requests/components/components.dart';
 
+import '../../../../core/utils/date_utils.dart';
+
 class AlpinaRequestViewPage extends StatelessWidget {
   final String requestId;
   const AlpinaRequestViewPage({super.key, required this.requestId});
@@ -59,7 +61,10 @@ class _AlpinaRequestViewPageView extends StatelessWidget {
                 ),
                 const Gap(20),
                 const SectionLabel('Срок получения'),
-                Text(_formatDate(d.date), style: AppTypography.text1Regular),
+                Text(
+                  AppDateUtils.formatDate(d.date),
+                  style: AppTypography.text1Regular,
+                ),
                 const Gap(20),
                 const SectionLabel('Был ли ранее вам предоставлен доступ?'),
                 Text(
@@ -84,9 +89,5 @@ class _AlpinaRequestViewPageView extends StatelessWidget {
         },
       ),
     );
-  }
-
-  String _formatDate(DateTime date) {
-    return '${date.day.toString().padLeft(2, '0')}.${date.month.toString().padLeft(2, '0')}.${date.year}';
   }
 }

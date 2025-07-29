@@ -1,5 +1,4 @@
-import 'package:intl/intl.dart';
-
+import '../../../../core/utils/date_utils.dart';
 import '../../domain/entities/poll.dart';
 
 class PollCardViewModel {
@@ -20,7 +19,7 @@ class PollCardViewModel {
   });
 
   factory PollCardViewModel.fromEntity(Poll poll) {
-    final createdAt = formatPollTimestamp(poll.createdAt);
+    final createdAt = AppDateUtils.formatRelativeTimestamp(poll.createdAt);
 
     return PollCardViewModel(
       title: poll.title,
@@ -30,27 +29,5 @@ class PollCardViewModel {
       isCompleted: poll.isCompleted,
       createdAt: createdAt,
     );
-  }
-
-  static String formatPollTimestamp(DateTime timestamp) {
-    final now = DateTime.now();
-    final today = DateTime(now.year, now.month, now.day);
-    final date = DateTime(timestamp.year, timestamp.month, timestamp.day);
-
-    final difference = today.difference(date).inDays;
-
-    final timePart = DateFormat('HH:mm', 'ru').format(timestamp);
-
-    if (difference == 0) {
-      return 'Сегодня в $timePart';
-    } else if (difference == 1) {
-      return 'Вчера в $timePart';
-    } else {
-      final datePart = DateFormat(
-        'dd MMMM',
-        'ru',
-      ).format(timestamp); // e.g. "27 июля"
-      return '$datePart в $timePart';
-    }
   }
 }

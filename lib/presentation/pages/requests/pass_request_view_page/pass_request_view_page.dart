@@ -7,6 +7,8 @@ import 'package:hr_tcc/presentation/blocs/pass_request/pass_request_view_bloc.da
 import 'package:hr_tcc/presentation/pages/requests/components/components.dart';
 import 'package:hr_tcc/config/themes/themes.dart';
 
+import '../../../../core/utils/date_utils.dart';
+
 class PassRequestViewPage extends StatelessWidget {
   final String requestId;
   const PassRequestViewPage({super.key, required this.requestId});
@@ -112,7 +114,7 @@ class PassRequestViewPage extends StatelessWidget {
                   const SizedBox(height: 2),
                   if (request.dateRange != null)
                     Text(
-                      '${_formatDate(request.dateRange!.start)} — ${_formatDate(request.dateRange!.end)}',
+                      AppDateUtils.formatDateRange(request.dateRange!),
                       style: AppTypography.text1Regular.copyWith(
                         color: AppColors.black,
                       ),
@@ -164,10 +166,6 @@ class PassRequestViewPage extends StatelessWidget {
         },
       ),
     );
-  }
-
-  String _formatDate(DateTime date) {
-    return '${date.day.toString().padLeft(2, '0')}.${date.month.toString().padLeft(2, '0')}.${date.year}';
   }
 
   String _formatTime(TimeOfDay t) {

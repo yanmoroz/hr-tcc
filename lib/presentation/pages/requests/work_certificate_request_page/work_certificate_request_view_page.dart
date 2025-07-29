@@ -8,6 +8,8 @@ import 'package:hr_tcc/domain/usecases/fetch_work_certificate_request_details_us
 import 'package:hr_tcc/domain/repositories/work_certificate_request_repository_mock.dart';
 import 'package:hr_tcc/presentation/blocs/work_certificate_request/work_certificate_request_view_bloc.dart';
 
+import '../../../../core/utils/date_utils.dart';
+
 class WorkCertificateRequestViewPage extends StatelessWidget {
   final String requestId;
   const WorkCertificateRequestViewPage({required this.requestId, super.key});
@@ -67,7 +69,7 @@ class _WorkCertificateRequestView extends StatelessWidget {
                 const Gap(20),
                 const SectionLabel('Срок получение'),
                 Text(
-                  _formatDate(request.receiveDate),
+                  AppDateUtils.formatDate(request.receiveDate),
                   style: AppTypography.text1Regular,
                 ),
                 const Gap(20),
@@ -83,9 +85,5 @@ class _WorkCertificateRequestView extends StatelessWidget {
         },
       ),
     );
-  }
-
-  String _formatDate(DateTime date) {
-    return '${date.day.toString().padLeft(2, '0')}.${date.month.toString().padLeft(2, '0')}.${date.year}';
   }
 }

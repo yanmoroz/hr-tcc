@@ -6,6 +6,8 @@ import 'package:hr_tcc/domain/models/requests/requests.dart';
 import 'package:hr_tcc/presentation/blocs/blocs.dart';
 import 'package:hr_tcc/presentation/pages/requests/components/components.dart';
 
+import '../../../../core/utils/date_utils.dart';
+
 class WorkBookRequestViewPage extends StatelessWidget {
   final String requestId;
   const WorkBookRequestViewPage({required this.requestId, super.key});
@@ -60,7 +62,7 @@ class _WorkBookRequestView extends StatelessWidget {
                 const Gap(16),
                 const SectionLabel('Срок получения'),
                 Text(
-                  WorkBookRequestViewBloc.formatDate(request.receiveDate),
+                  AppDateUtils.formatDate(request.receiveDate),
                   style: AppTypography.text1Regular,
                 ),
                 const Gap(24),
