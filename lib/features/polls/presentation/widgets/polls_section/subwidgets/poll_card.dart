@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:hr_tcc/config/themes/themes.dart';
-import 'package:hr_tcc/models/models.dart';
 import 'package:hr_tcc/presentation/widgets/common/common.dart';
 
+import '../../../viewmodels/poll_card_view_model.dart';
 import 'poll_status_widget.dart';
 
 class PollCard extends StatelessWidget {
-  final PollCardModel poll;
+  final PollCardViewModel viewModel;
   final VoidCallback onTap;
   final Color imageBorderColor;
   final Color timestampColor;
@@ -16,7 +16,7 @@ class PollCard extends StatelessWidget {
 
   const PollCard({
     super.key,
-    required this.poll,
+    required this.viewModel,
     required this.onTap,
     this.imageBorderColor = AppColors.gray100,
     this.timestampColor = AppColors.gray700,
@@ -33,9 +33,9 @@ class PollCard extends StatelessWidget {
         Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            if (poll.imageUrl != null) ...[
+            if (viewModel.imageUrl != null) ...[
               AppImageWithBorder(
-                imageUrl: poll.imageUrl ?? '',
+                imageUrl: viewModel.imageUrl ?? '',
                 width: 60,
                 height: 60,
                 borderRadius: 8,
@@ -51,16 +51,16 @@ class PollCard extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    poll.timestamp,
+                    viewModel.createdAt,
                     style: AppTypography.caption2Medium.copyWith(
                       color: timestampColor,
                     ),
                   ),
                   const SizedBox(height: 8),
-                  Text(poll.title, style: AppTypography.text1Medium),
+                  Text(viewModel.title, style: AppTypography.text1Medium),
                   const SizedBox(height: 4),
                   Text(
-                    poll.subtitle,
+                    viewModel.subtitle,
                     style: AppTypography.text2Regular.copyWith(
                       color: subtitleColor,
                     ),
@@ -68,10 +68,10 @@ class PollCard extends StatelessWidget {
                   const SizedBox(height: 24),
                   Row(
                     children: [
-                      PollStatusWidget(status: poll.status),
+                      PollStatusWidget(isCompleted: viewModel.isCompleted),
                       const Spacer(),
                       Text(
-                        'Прошли: ${poll.passedCount}',
+                        'Прошли: ${viewModel.passedCount}',
                         style: AppTypography.text2Regular,
                       ),
                     ],
@@ -81,7 +81,7 @@ class PollCard extends StatelessWidget {
             ),
           ],
         ),
-        if (poll.status == PollStatus.notPassed) ...[
+        if (!viewModel.isCompleted) ...[
           const SizedBox(height: 16),
           SizedBox(
             height: 40,

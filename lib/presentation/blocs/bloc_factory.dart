@@ -6,6 +6,7 @@ import '../../domain/repositories/access_token_repository.dart';
 import '../../domain/repositories/auth_repository.dart';
 import '../../domain/repositories/current_user_repository.dart';
 import '../../domain/usecases/usecases.dart';
+import '../../features/polls/domain/usecases/get_polls_usecase.dart';
 import '../../models/models.dart';
 import '../cubits/auth/auth_cubit.dart';
 import '../cubits/snackbar/snackbar_cubit.dart';
@@ -207,6 +208,6 @@ class BlocFactory {
   }
 
   static PollsSectionBloc createPollsSectionBloc() {
-    return PollsSectionBloc(GetIt.I<FetchPollsListUseCase>());
+    return PollsSectionBloc(GetIt.I<GetPollsUseCase>());
   }
 }

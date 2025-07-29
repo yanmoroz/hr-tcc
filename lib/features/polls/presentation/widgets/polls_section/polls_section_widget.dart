@@ -17,7 +17,7 @@ class PollsSectionWidget extends StatelessWidget {
       create: (_) => BlocFactory.createPollsSectionBloc()..add(LoadPolls()),
       child: BlocBuilder<PollsSectionBloc, PollsSectionState>(
         builder: (context, state) {
-          if (state is PollsSectionLoaded) {
+          if (state is PollsLoaded) {
             return VerticalSection(
               title: 'Опросы',
               moreButtonText: 'Перейти в раздел',
@@ -31,7 +31,7 @@ class PollsSectionWidget extends StatelessWidget {
                       shadowColor: AppColors.cardShadowColor,
                       children: [
                         PollCard(
-                          poll: poll,
+                          viewModel: poll,
                           onTap: () {
                             context.push(AppRoute.polls.path);
                           },

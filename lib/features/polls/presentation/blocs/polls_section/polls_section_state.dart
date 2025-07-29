@@ -2,10 +2,10 @@ part of 'polls_section_bloc.dart';
 
 abstract class PollsSectionState {}
 
-class PollsSectionInitial extends PollsSectionState {}
+class Initial extends PollsSectionState {}
 
-class PollsSectionLoaded extends PollsSectionState {
-  final List<PollCardModel> polls;
+class PollsLoaded extends PollsSectionState {
+  final List<PollCardViewModel> polls;
 
-  PollsSectionLoaded({required this.polls});
+  PollsLoaded({required this.polls});
 }

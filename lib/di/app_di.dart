@@ -1,9 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get_it/get_it.dart';
-import 'package:hr_tcc/data/repositories/poll_repository_imp.dart';
-import 'package:hr_tcc/data/repositories/repositories.dart';
-import 'package:hr_tcc/domain/repositories/repositories.dart';
 import 'package:hr_tcc/domain/services/network_service.dart';
 import 'package:hr_tcc/domain/usecases/usecases.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
@@ -22,18 +19,45 @@ import '../data/datasources/remote/auth_remote_data_source_impl.dart';
 import '../data/logging/app_logger_impl.dart';
 import '../data/repositories/absence_request_repository_mock.dart';
 import '../data/repositories/access_token_repository_impl.dart';
+import '../data/repositories/adress_book_repository_imp.dart';
+import '../data/repositories/auth_repository_impl.dart';
 import '../data/repositories/business_trip_request_repository_mock.dart';
 import '../data/repositories/car_brand_repository_mock.dart';
 import '../data/repositories/current_user_repository_impl.dart';
+import '../data/repositories/iink_repository_impl.dart';
+import '../data/repositories/mock_request_types_repository.dart';
+import '../data/repositories/mock_requests_repository.dart';
+import '../data/repositories/news_list_repository_imp.dart';
+import '../data/repositories/pincode_repository_impl.dart';
+import '../data/repositories/resale_repository_imp.dart';
+import '../data/repositories/two_ndfl_repository_imp.dart';
 import '../data/repositories/violation_request_repository_mock.dart';
+import '../data/repositories/work_book_request_repository_imp.dart';
 import '../data/services/network_info_impl.dart';
+import '../domain/repositories/absence_request_repository.dart';
 import '../domain/repositories/access_token_repository.dart';
+import '../domain/repositories/adress_book_repository.dart';
+import '../domain/repositories/auth_repository.dart';
 import '../domain/repositories/business_trip_request_repository.dart';
 import '../domain/repositories/car_brand_repository.dart';
 import '../domain/repositories/current_user_repository.dart';
+import '../domain/repositories/link_repository.dart';
+import '../domain/repositories/news_list_repository.dart';
 import '../domain/repositories/parking_request_repository.dart';
 import '../domain/repositories/parking_request_repository_mock.dart';
+import '../domain/repositories/pincode_repository.dart';
+import '../domain/repositories/request_types_repository.dart';
+import '../domain/repositories/requests_repository.dart';
+import '../domain/repositories/resale_repository.dart';
+import '../domain/repositories/two_ndfl_repository.dart';
+import '../domain/repositories/violation_request_repository.dart';
+import '../domain/repositories/work_book_repository.dart';
 import '../domain/services/network_info.dart';
+import '../features/polls/data/datasources/poll_mock_data_source.dart';
+import '../features/polls/data/datasources/poll_remote_data_source.dart';
+import '../features/polls/data/repositories/poll_repository_impl.dart';
+import '../features/polls/domain/repositories/poll_repository.dart';
+import '../features/polls/domain/usecases/get_polls_usecase.dart';
 import '../presentation/cubits/auth/auth_cubit.dart';
 import '../presentation/cubits/snackbar/snackbar_cubit.dart';
 import '../presentation/navigation/app_router.dart';
@@ -94,6 +118,7 @@ void _registerDataSources(GetIt getIt) {
       sharedPreferences: getIt<SharedPreferences>(),
     ),
   );
+  getIt.registerLazySingleton<PollRemoteDataSource>(() => PollMockDataSource());
 }
 
 void _registerRepositories(GetIt getIt) {
@@ -113,7 +138,8 @@ void _registerRepositories(GetIt getIt) {
   getIt.registerLazySingleton<RequestTypesRepository>(
     () => MockRequestTypesRepository(),
   );
-  getIt.registerLazySingleton<PollRepository>(() => PollRepositoryImp());
+  // TODO: ...
+  // getIt.registerLazySingleton<PollRepository>(() => PollRepositoryImp());
   getIt.registerLazySingleton<LinkRepository>(
     () => LinkRepositoryImpl(getIt<NetworkService>()),
   );
@@ -154,8 +180,12 @@ void _registerRepositories(GetIt getIt) {
     () => CarBrandRepositoryMock(),
   );
 
-  getIt.registerLazySingleton<PollQuestionRepository>(
-    () => PollQuestionRepositoryImp(),
+  // TODO: ...
+  // getIt.registerLazySingleton<PollQuestionRepository>(
+  //   () => PollQuestionRepositoryImp(),
+  // );
+  getIt.registerLazySingleton<PollRepository>(
+    () => PollRepositoryImpl(getIt<PollRemoteDataSource>()),
   );
 }
 
@@ -192,9 +222,10 @@ void _registerUseCases(GetIt getIt) {
   getIt.registerLazySingleton(
     () => FetchWorkBookRequestDetailsUseCase(getIt<WorkBookRepository>()),
   );
-  getIt.registerLazySingleton(
-    () => FetchPollsListUseCase(getIt<PollRepository>()),
-  );
+  // TODO: ...
+  // getIt.registerLazySingleton(
+  //   () => FetchPollsListUseCase(getIt<PollRepository>()),
+  // );
   getIt.registerLazySingleton(
     () => FetchNewsListUseCase(getIt<NewsListRepository>()),
   );
@@ -222,12 +253,14 @@ void _registerUseCases(GetIt getIt) {
   getIt.registerLazySingleton(
     () => GetCarBrandsUseCase(getIt<CarBrandRepository>()),
   );
-  getIt.registerLazySingleton(
-    () => FetchPollDetailUseCase(getIt<PollQuestionRepository>()),
-  );
-  getIt.registerLazySingleton(
-    () => SafePollDetailUseCase(getIt<PollQuestionRepository>()),
-  );
+  // TODO: ...
+  // getIt.registerLazySingleton(
+  //   () => FetchPollDetailUseCase(getIt<PollQuestionRepository>()),
+  // );
+  // getIt.registerLazySingleton(
+  //   () => SafePollDetailUseCase(getIt<PollQuestionRepository>()),
+  // );
+  getIt.registerLazySingleton(() => GetPollsUseCase(getIt<PollRepository>()));
 }
 
 void _registerCubits(GetIt getIt) {

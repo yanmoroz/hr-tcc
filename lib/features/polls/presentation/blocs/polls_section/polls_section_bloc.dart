@@ -1,14 +1,17 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:hr_tcc/domain/usecases/usecases.dart';
-import 'package:hr_tcc/models/models.dart';
+
+import '../../../domain/usecases/get_polls_usecase.dart';
+import '../../viewmodels/poll_card_view_model.dart';
 
 part 'polls_section_event.dart';
 part 'polls_section_state.dart';
 
 class PollsSectionBloc extends Bloc<PollsSectionEvent, PollsSectionState> {
-  final FetchPollsListUseCase fetchPollsUseCase;
+  // TODO: ...
+  // final FetchPollsListUseCase fetchPollsUseCase;
+  final GetPollsUseCase getPollsUseCase;
 
-  PollsSectionBloc(this.fetchPollsUseCase) : super(PollsSectionInitial()) {
+  PollsSectionBloc(this.getPollsUseCase) : super(Initial()) {
     on<LoadPolls>(_onLoadPolls);
   }
 
@@ -16,39 +19,16 @@ class PollsSectionBloc extends Bloc<PollsSectionEvent, PollsSectionState> {
     LoadPolls event,
     Emitter<PollsSectionState> emit,
   ) async {
-    await Future.delayed(
-      const Duration(milliseconds: 500),
-    ); // эмуляция загрузки
+    final result = await getPollsUseCase.call(
+      page: 1,
+      pageSize: 2,
+      isCompleted: false,
+    );
 
-    final polls = [
-      PollCardModel(
-        id: 1,
-        imageUrl: 'https://placehold.co/600x400@2x.png',
-        timestamp: 'Вчера в 21:08',
-        title: 'Нам важно ваше мнение — участвуйте в выборе добрых дел',
-        subtitle: '«Свет в сердцах»: развитие волонтёрства в S8 Capital',
-        passedCount: 557,
-        status: PollStatus.notPassed,
+    emit(
+      PollsLoaded(
+        polls: result.items.map(PollCardViewModel.fromEntity).toList(),
       ),
-      PollCardModel(
-        id: 2,
-        imageUrl: 'https://placehold.co/600x400@2x.png',
-        timestamp: 'Вчера в 21:08',
-        title: 'Нам важно ваше мнение — участвуйте в выборе добрых дел',
-        subtitle: '«Свет в сердцах»: развитие волонтёрства в S8 Capital',
-        passedCount: 157,
-        status: PollStatus.passed,
-      ),
-      PollCardModel(
-        id: 3,
-        imageUrl: 'https://placehold.co/600x400@2x.png',
-        timestamp: 'Вчера в 21:08',
-        title: 'Нам важно ваше мнение — участвуйте в выборе добрых дел',
-        subtitle: '«Свет в сердцах»: развитие волонтёрства в S8 Capital',
-        passedCount: 157,
-        status: PollStatus.notPassed,
-      ),
-    ];
-    emit(PollsSectionLoaded(polls: polls));
+    );
   }
 }

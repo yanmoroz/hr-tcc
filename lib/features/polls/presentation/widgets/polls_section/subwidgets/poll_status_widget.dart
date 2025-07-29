@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:hr_tcc/config/themes/themes.dart';
-import 'package:hr_tcc/models/models.dart';
 
 class PollStatusWidget extends StatelessWidget {
+  final bool isCompleted;
   final Color textColorDone;
   final Color textColorUnDone;
   final Color bgColorDone;
@@ -10,21 +10,18 @@ class PollStatusWidget extends StatelessWidget {
 
   const PollStatusWidget({
     super.key,
-    required this.status,
+    required this.isCompleted,
     this.textColorDone = AppColors.white,
     this.textColorUnDone = AppColors.black,
     this.bgColorDone = AppColors.gray500,
     this.bgColorUnDone = AppColors.orange100,
   });
 
-  final PollStatus status;
-
   @override
   Widget build(BuildContext context) {
-    final isDone = status == PollStatus.passed;
-    final bgColor = isDone ? bgColorDone : bgColorUnDone;
-    final textColor = isDone ? textColorDone : textColorUnDone;
-    final label = isDone ? 'Пройден' : 'Не пройден';
+    final bgColor = isCompleted ? bgColorDone : bgColorUnDone;
+    final textColor = isCompleted ? textColorDone : textColorUnDone;
+    final label = isCompleted ? 'Пройден' : 'Не пройден';
 
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),

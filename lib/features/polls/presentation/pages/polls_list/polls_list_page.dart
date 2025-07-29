@@ -1,13 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:go_router/go_router.dart';
 import 'package:hr_tcc/config/themes/themes.dart';
 import 'package:hr_tcc/models/models.dart';
 import 'package:hr_tcc/presentation/blocs/blocs.dart';
 import 'package:hr_tcc/presentation/widgets/common/common.dart';
-
-import '../../widgets/polls_section/subwidgets/poll_card.dart';
-import '../../../../../presentation/navigation/navigation.dart';
 
 class PollsListPage extends StatefulWidget {
   final Color backgroundColor;
@@ -147,12 +143,13 @@ class _PollsListPageState extends State<PollsListPage> {
               color: cardColor,
               shadowColor: AppColors.cardShadowColor,
               children: [
-                PollCard(
-                  poll: poll,
-                  onTap: () {
-                    context.push(AppRoute.pollDetailWithId('poll_001'));
-                  },
-                ),
+                // TODO: fix it
+                // PollCard(
+                //   poll: poll,
+                //   onTap: () {
+                //     context.push(AppRoute.pollDetailWithId('poll_001'));
+                //   },
+                // ),
               ],
             ),
           ),
