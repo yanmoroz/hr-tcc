@@ -8,8 +8,6 @@ part 'polls_section_event.dart';
 part 'polls_section_state.dart';
 
 class PollsSectionBloc extends Bloc<PollsSectionEvent, PollsSectionState> {
-  // TODO: ...
-  // final FetchPollsListUseCase fetchPollsUseCase;
   final GetPollsUseCase getPollsUseCase;
 
   PollsSectionBloc(this.getPollsUseCase) : super(Initial()) {

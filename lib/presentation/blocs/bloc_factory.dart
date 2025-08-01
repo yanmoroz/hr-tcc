@@ -48,7 +48,7 @@ class BlocFactory {
   }
 
   static PollsListBloc createPollsListBloc() {
-    return PollsListBloc(fetchPollsUseCase: GetIt.I<FetchPollsListUseCase>());
+    return PollsListBloc(getPollsUseCase: GetIt.I<GetPollsUseCase>());
   }
 
   static AddressBookBloc createAddressBookBloc() {

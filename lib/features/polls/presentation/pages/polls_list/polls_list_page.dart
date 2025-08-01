@@ -31,134 +31,87 @@ class _PollsListPageState extends State<PollsListPage> {
   }
 
   void _onScroll() {
-    final bloc = context.read<PollsListBloc>();
-    final state = bloc.state;
-    if (!state.isLoadingMore &&
-        state.hasMorePassedPolls &&
-        _scrollController.position.pixels >=
-            _scrollController.position.maxScrollExtent - 200) {
-      bloc.add(LoadMoreFinishedPolls());
-    }
+    // final bloc = context.read<PollsListBloc>();
+    // final state = bloc.state;
+    // if (!state.isLoadingMore &&
+    //     state.hasMorePassedPolls &&
+    //     _scrollController.position.pixels >=
+    //         _scrollController.position.maxScrollExtent - 200) {
+    //   bloc.add(LoadMoreFinishedPolls());
+    // }
   }
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<PollsListBloc, PollsListState>(
-      builder: (context, state) {
-        final filtered = state.selectedFilter;
-        final grouped = state.groupedPolls;
+    // return Scaffold(
+    //   backgroundColor: widget.backgroundColor,
+    //   appBar: const AppNavigationBar(title: 'Опросы'),
+    //   body: Column(
+    //     children: [
+    //       BlocBuilder<PollsListBloc, PollsListState>(
+    //         builder: (context, state) {
+    //           if (state is PollsListLoading) {
+    //             return const Center(child: CircularProgressIndicator());
+    //           }
 
-        final notPassed =
-            (filtered == PollStatus.all || filtered == PollStatus.notPassed)
-                ? grouped[PollStatus.notPassed] ?? []
-                : <PollCardModel>[];
+    //           if (state is PollsListLoaded) {
+    //             return Expanded(
+    //               child: ListView.builder(
+    //                 itemCount: state.viewModel.polls.length,
+    //                 itemBuilder: (context, index) {
+    //                   final poll = state.viewModel.polls[index];
+    //                   return Text(poll.title);
+    //                 },
+    //               ),
+    //             );
+    //           }
 
-        final passed =
-            (filtered == PollStatus.all || filtered == PollStatus.passed)
-                ? grouped[PollStatus.passed] ?? []
-                : <PollCardModel>[];
-
-        return Scaffold(
-          backgroundColor: widget.backgroundColor,
-          appBar: const AppNavigationBar(title: 'Опросы'),
-          body: Column(
-            children: [
-              BlocListener<PollsListBloc, PollsListState>(
-                listenWhen: (prev, curr) => prev.filterTabs != curr.filterTabs,
-                listener: (context, state) {
-                  if (state.filterTabs != null) {
-                    context.read<FilterBloc>().add(
-                      SetFilterTabs<PollStatus>(state.filterTabs!),
-                    );
-                  }
-                },
-                child: BlocListener<FilterBloc, FilterState>(
-                  listenWhen:
-                      (prev, curr) => prev.selectedIndex != curr.selectedIndex,
-                  listener: (context, state) {
-                    context.read<PollsListBloc>().add(
-                      FilterPollsByStatus(state.selectedTab.value),
-                    );
-                  },
-                  child: FilterBar(
-                    filterSelectorTabBuilder: (
-                      tab, {
-                      required bool isSelected,
-                    }) {
-                      return FilterBarTab(isSelected: isSelected, tab: tab);
-                    },
-                    onTabChanged: (index) => {},
-                  ),
-                ),
-              ),
-              Expanded(
-                child: ListView(
-                  key: PageStorageKey<String>('polls_list_${filtered?.name}'),
-                  controller: _scrollController,
-                  children: [
-                    if (notPassed.isNotEmpty)
-                      _buildSection(
-                        state.sectionTitles[PollStatus.notPassed] ??
-                            'Непройденные',
-                        notPassed,
-                        widget.cardColor,
-                      ),
-                    if (passed.isNotEmpty)
-                      _buildSection(
-                        state.sectionTitles[PollStatus.passed] ?? 'Пройденные',
-                        passed,
-                        widget.cardColor,
-                      ),
-                    if ((filtered == PollStatus.all ||
-                            filtered == PollStatus.passed) &&
-                        state.hasMorePassedPolls)
-                      const Padding(
-                        padding: EdgeInsets.all(16),
-                        child: Center(child: CircularProgressIndicator()),
-                      ),
-                  ],
-                ),
-              ),
-            ],
-          ),
-        );
-      },
+    //           return const SizedBox.shrink();
+    //         },
+    //       ),
+    //     ],
+    //   ),
+    // );
+    return Scaffold(
+      backgroundColor: widget.backgroundColor,
+      appBar: const AppNavigationBar(title: 'Опросы'),
+      body: const Placeholder(),
     );
   }
 
-  Widget _buildSection(
-    String title,
-    List<PollCardModel> polls,
-    Color cardColor,
-  ) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Padding(
-          padding: const EdgeInsets.fromLTRB(16, 24, 16, 8),
-          child: Text(title, style: AppTypography.text1Semibold),
-        ),
-        ...polls.map(
-          (poll) => Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-            child: AppInfoCard(
-              color: cardColor,
-              shadowColor: AppColors.cardShadowColor,
-              children: [
-                // TODO: fix it
-                // PollCard(
-                //   poll: poll,
-                //   onTap: () {
-                //     context.push(AppRoute.pollDetailWithId('poll_001'));
-                //   },
-                // ),
-              ],
-            ),
-          ),
-        ),
-      ],
-    );
-  }
+  // Widget _buildSection(
+  //   String title,
+  //   List<PollCardModel> polls,
+  //   Color cardColor,
+  // ) {
+  //   return Column(
+  //     crossAxisAlignment: CrossAxisAlignment.start,
+  //     children: [
+  //       Padding(
+  //         padding: const EdgeInsets.fromLTRB(16, 24, 16, 8),
+  //         child: Text(title, style: AppTypography.text1Semibold),
+  //       ),
+  //       ...polls.map(
+  //         (poll) => Padding(
+  //           padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+  //           child: AppInfoCard(
+  //             color: cardColor,
+  //             shadowColor: AppColors.cardShadowColor,
+  //             children: [
+  //               // TODO: fix it
+  //               // PollCard(
+  //               //   poll: poll,
+  //               //   onTap: () {
+  //               //     context.push(AppRoute.pollDetailWithId('poll_001'));
+  //               //   },
+  //               // ),
+  //             ],
+  //           ),
+  //         ),
+  //       ),
+  //     ],
+  //   );
+  // }
 
   @override
   void dispose() {

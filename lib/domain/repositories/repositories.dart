@@ -9,7 +9,6 @@ export 'link_repository.dart';
 export 'news_list_repository.dart';
 export 'pincode_repository.dart';
 export 'poll_question_repository.dart';
-export 'poll_repository.dart';
 export 'request_types_repository.dart';
 export 'requests_repository.dart';
 export 'resale_repository.dart';

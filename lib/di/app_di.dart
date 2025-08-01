@@ -222,10 +222,6 @@ void _registerUseCases(GetIt getIt) {
   getIt.registerLazySingleton(
     () => FetchWorkBookRequestDetailsUseCase(getIt<WorkBookRepository>()),
   );
-  // TODO: ...
-  // getIt.registerLazySingleton(
-  //   () => FetchPollsListUseCase(getIt<PollRepository>()),
-  // );
   getIt.registerLazySingleton(
     () => FetchNewsListUseCase(getIt<NewsListRepository>()),
   );
